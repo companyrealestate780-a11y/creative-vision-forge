@@ -62,7 +62,7 @@ export function Hero() {
   });
 
   return (
-    <section id="top" className="dot-grid relative overflow-hidden px-4 pt-10 sm:px-6 lg:pt-14">
+    <section id="top" className="relative overflow-hidden px-4 pt-10 sm:px-6 lg:pt-14">
       <div
         aria-hidden
         className="drift-blob pointer-events-none absolute -top-28 right-0 size-80 rounded-full bg-brand-orange/15 blur-3xl"
