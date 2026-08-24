@@ -103,13 +103,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         // Matches the families actually used by --font-display / --font-sans.
-        // Loaded non-render-blocking via media="print" + onload swap below.
+        // media="print" keeps it off the critical path; the script below
+        // promotes it to "all" once the sheet has loaded.
         rel: "stylesheet",
         href: FONT_HREF,
         media: "print",
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onLoad: "this.media='all'",
-      } as any,
+        "data-font-css": "true",
+      },
+
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
