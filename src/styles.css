@@ -927,3 +927,55 @@ html.theme-switching *:not(svg):not(path) {
     transition-duration: 0.01ms;
   }
 }
+
+/* ---------------------------------------------------------------
+ * Rendering-cost guards (Lighthouse: main-thread work / raster)
+ * --------------------------------------------------------------- */
+
+/* Skip layout, paint and raster for project slides while they are far
+ * off screen. The intrinsic size keeps the scrollbar stable so this
+ * cannot introduce layout shift. */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
+/* Marquee lanes only animate while their lane is on screen. */
+.marquee-track,
+.marquee-back {
+  animation-play-state: running;
+}
+
+@media (max-width: 767px) {
+  /* Two large blurred blobs animating forever are the most expensive
+   * layers on the page for mobile GPUs: keep the color wash, drop the
+   * per-frame compositing and halve the blur radius. */
+  .drift-blob {
+    animation: none;
+    will-change: auto;
+    filter: blur(28px);
+  }
+
+  /* The hero portrait float is redundant next to the scroll parallax on
+   * small screens, where it competes with scrolling for the compositor. */
+  .float-slow {
+    animation: none;
+  }
+
+  /* Slow the marquees down so fewer composited frames are needed. */
+  .marquee-track {
+    animation-duration: 46s;
+  }
+
+  .marquee-back {
+    animation-duration: 54s;
+  }
+}
+
+/* Parallax and scroll-driven motion are pure decoration on touch
+ * devices, where they add scroll-linked work on the main thread. */
+@media (hover: none) and (pointer: coarse) {
+  .sd-parallax {
+    animation: none;
+  }
+}
