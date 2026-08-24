@@ -72,6 +72,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const FONT_HREF =
+  "https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -99,9 +102,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
+        // Matches the families actually used by --font-display / --font-sans.
+        // Loaded non-render-blocking via media="print" + onload swap below.
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
-      },
+        href: FONT_HREF,
+        media: "print",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onLoad: "this.media='all'",
+      } as any,
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -119,6 +127,9 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <noscript>
+          <link rel="stylesheet" href={FONT_HREF} />
+        </noscript>
       </head>
       <body>
         {children}

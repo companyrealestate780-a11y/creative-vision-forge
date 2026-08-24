@@ -7,7 +7,7 @@ export function ProjectSlide({ project }: { project: Project }) {
 
   return (
     <Tilt max={4}>
-      <article className="slide-card card-hover dot-grid group overflow-hidden px-5 py-6 hover:shadow-[var(--shadow-raised)] sm:px-8 sm:py-9">
+      <article className="cv-auto slide-card card-hover dot-grid group overflow-hidden px-5 py-6 hover:shadow-[var(--shadow-raised)] sm:px-8 sm:py-9">
         <div
           className={`grid items-center gap-7 lg:grid-cols-[1.35fr_0.65fr] ${imageFirst ? "" : "lg:[&>*:first-child]:order-2"}`}
         >
@@ -15,8 +15,8 @@ export function ProjectSlide({ project }: { project: Project }) {
             <div className="media-zoom rounded-[1.5rem] bg-secondary">
               <img
                 src={project.image}
-                srcSet={`${project.imageSmall} 700w, ${project.image} 1400w`}
-                sizes="(max-width: 1024px) 100vw, 800px"
+                srcSet={`${project.imageTiny} 420w, ${project.imageSmall} 700w, ${project.image} 1400w`}
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 100vw, 800px"
                 alt={project.imageAlt}
                 width={1400}
                 height={900}
