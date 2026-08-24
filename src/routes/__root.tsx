@@ -72,6 +72,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const FONT_HREF =
+  "https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -99,9 +102,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
+        // Matches the families actually used by --font-display / --font-sans.
+        // media="print" keeps it off the critical path; the script below
+        // promotes it to "all" once the sheet has loaded.
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
+        href: FONT_HREF,
+        media: "print",
+        "data-font-css": "true",
       },
+
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -113,12 +122,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 const themeInitScript = `(function(){try{var s=localStorage.getItem("theme");var d=s?s==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d);}catch(e){}})();`;
 
+// Promotes the deferred web-font stylesheet once it is available, so fonts
+// never block first paint but still swap in as soon as they arrive.
+const fontActivateScript = `(function(){function a(){var l=document.querySelector('link[data-font-css]');if(l)l.media='all';}if(document.readyState!=='loading'){requestAnimationFrame(a);}else{document.addEventListener('DOMContentLoaded',a);}})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: fontActivateScript }} />
+
+        <noscript>
+          <link rel="stylesheet" href={FONT_HREF} />
+        </noscript>
       </head>
       <body>
         {children}

@@ -63,6 +63,9 @@ export function useParallax<T extends HTMLElement>(strength = 40) {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Touch devices: skip scroll-linked JS entirely — it competes with the
+    // browser's own scrolling and buys almost nothing visually there.
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
 
     let frame = 0;
     let visible = false;

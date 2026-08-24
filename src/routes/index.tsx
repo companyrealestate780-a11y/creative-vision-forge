@@ -39,7 +39,7 @@ function Index() {
 
         <section id="work" className="px-4 py-8 sm:px-6 lg:py-12">
           <div className="mx-auto max-w-6xl space-y-4">
-            <div className="dot-grid relative overflow-hidden rounded-[2rem] px-2 py-8 sm:py-12">
+            <div className="relative overflow-hidden rounded-[2rem] px-2 py-8 sm:py-12">
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold tracking-[0.2em] text-brand-orange uppercase">

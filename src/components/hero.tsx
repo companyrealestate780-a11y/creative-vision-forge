@@ -1,5 +1,7 @@
 import { motion, useReducedMotion, type Variants } from "motion/react";
+import portraitTiny from "@/assets/portrait-dev-420.webp";
 import portraitSm from "@/assets/portrait-dev-640.webp";
+import portraitMd from "@/assets/portrait-dev-720.webp";
 import portrait from "@/assets/portrait-dev.webp";
 import { Magnetic } from "@/components/motion-text";
 import { Parallax } from "@/components/reveal";
@@ -61,7 +63,7 @@ export function Hero() {
   });
 
   return (
-    <section id="top" className="dot-grid relative overflow-hidden px-4 pt-10 sm:px-6 lg:pt-14">
+    <section id="top" className="relative overflow-hidden px-4 pt-10 sm:px-6 lg:pt-14">
       <div
         aria-hidden
         className="drift-blob pointer-events-none absolute -top-28 right-0 size-80 rounded-full bg-brand-orange/15 blur-3xl"
@@ -117,40 +119,28 @@ export function Hero() {
         </motion.p>
 
         {/* Showcase card */}
-        <motion.div
-          className="relative mt-8 transform-gpu sm:mt-10"
-          variants={{
-            hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 48 },
-            show: {
-              opacity: 1,
-              y: 0,
-              transition: reduce ? { duration: 0 } : { delay: 0.35, duration: 0.95, ease: EASE },
-            },
-          }}
-          initial="hidden"
-          animate="show"
-        >
+        {/* LCP element. Entrance is a CSS transform-only animation so the
+            hero image paints on the very first frame instead of waiting for
+            hydration behind an opacity-0 motion variant. */}
+        <div className="hero-rise relative mt-8 transform-gpu sm:mt-10">
           <div className="slide-card relative overflow-hidden rounded-[2rem] bg-brand-sky/25 p-3 sm:rounded-[2.5rem] sm:p-4">
             <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-brand-sky/40 sm:rounded-[2rem]">
               <Parallax strength={-18} className="absolute inset-[-6%]">
-                <motion.img
+                <img
                   src={portrait}
-                  srcSet={`${portraitSm} 640w, ${portrait} 1024w`}
-                  sizes="(max-width: 640px) 100vw, 1152px"
+                  srcSet={`${portraitTiny} 420w, ${portraitSm} 640w, ${portraitMd} 720w, ${portrait} 1024w`}
+                  sizes="(max-width: 640px) 96vw, 1152px"
                   alt="Illustrated portrait of Mostafa Samir, a healthcare full-stack engineer"
                   width={1024}
                   height={1024}
                   decoding="async"
                   fetchPriority="high"
-                  className="float-slow size-full transform-gpu object-cover object-top"
-                  initial={reduce ? false : { scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.35, duration: 1.2, ease: EASE }}
+                  className="float-slow hero-media size-full transform-gpu object-cover object-top"
                 />
               </Parallax>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom row: scroll dot + year */}
         <motion.div
