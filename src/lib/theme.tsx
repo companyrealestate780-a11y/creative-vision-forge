@@ -48,7 +48,7 @@ function applyTheme(resolved: ResolvedTheme, animate: boolean) {
     root.dataset["themeTransition"] = "on";
     window.setTimeout(() => {
       delete root.dataset["themeTransition"];
-    }, 400);
+    }, 760);
   }
   root.classList.toggle("dark", resolved === "dark");
   root.style.colorScheme = resolved;
