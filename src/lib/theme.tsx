@@ -97,8 +97,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
+/**
+ * Safe fallback so a toggle rendered outside the provider (error boundaries,
+ * HMR re-mounts) degrades to a no-op instead of blanking the page.
+ */
+const FALLBACK: ThemeContextValue = {
+  theme: "system",
+  resolved: "light",
+  toggle: () => {},
+  setTheme: () => {},
+};
+
 export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
-  return ctx;
+  return useContext(ThemeContext) ?? FALLBACK;
 }
