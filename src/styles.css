@@ -295,7 +295,9 @@ html[data-theme-transition="on"] *::after {
 
 @media (prefers-reduced-motion: reduce) {
   html[data-theme-transition="on"],
-  html[data-theme-transition="on"] * {
+  html[data-theme-transition="on"] *,
+  html[data-theme-transition="on"] *::before,
+  html[data-theme-transition="on"] *::after {
     transition: none !important;
   }
 }
