@@ -110,25 +110,30 @@
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
+  /* Brand tokens flip so every cream/ink surface in the app inverts too. */
+  --cream: oklch(0.19 0.014 70);
+  --ink: oklch(0.955 0.021 96.5);
+  --signal: oklch(0.63 0.213 27.2);
+  --signal-dark: oklch(0.52 0.198 27.2);
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: oklch(0.24 0.016 70);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.24 0.016 70);
+  --popover-foreground: var(--ink);
+  --primary: var(--signal);
+  --primary-foreground: var(--ink);
+  --secondary: var(--ink);
+  --secondary-foreground: var(--cream);
+  --muted: oklch(0.26 0.014 70);
+  --muted-foreground: oklch(0.76 0.02 80);
+  --accent: var(--signal);
+  --accent-foreground: var(--ink);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 14%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
+  --ring: var(--signal);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
