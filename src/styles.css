@@ -270,3 +270,20 @@
   paint-order: stroke fill;
   letter-spacing: -0.02em;
 }
+
+html[data-theme-transition="on"],
+html[data-theme-transition="on"] * {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease,
+    fill 300ms ease,
+    stroke 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme-transition="on"],
+  html[data-theme-transition="on"] * {
+    transition: none !important;
+  }
+}
