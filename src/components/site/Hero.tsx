@@ -19,7 +19,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-background"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-background"
     >
       {/* Portrait — right half */}
       <div className="pointer-events-none absolute inset-y-0 right-0 w-[78%] sm:w-[62%] lg:w-[52%]">
@@ -29,9 +29,9 @@ export function Hero() {
           width={1920}
           height={1280}
           fetchPriority="high"
-          className="size-full object-cover object-center grayscale"
+          className="size-full object-cover object-center grayscale contrast-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/45 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/35 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/70" />
       </div>
 
@@ -60,7 +60,7 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         href="#contact"
-        className="absolute left-6 top-24 z-20 rounded-full bg-foreground px-7 py-2.5 text-[11px] uppercase tracking-[0.18em] text-background transition-opacity duration-300 hover:opacity-85 md:left-24 md:top-10"
+        className="absolute left-6 top-24 z-20 rounded-full bg-foreground px-7 py-2.5 text-[11px] uppercase tracking-[0.18em] text-background transition-opacity duration-300 hover:opacity-85 md:left-24 md:top-28"
       >
         Resume
       </motion.a>
@@ -69,7 +69,7 @@ export function Hero() {
         initial="hidden"
         animate="show"
         transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-        className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-center px-6 pb-28 pt-40 md:pl-24 lg:px-10 lg:pl-28"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pb-24 pt-36 md:pl-24 lg:px-10 lg:pl-28"
       >
         {/* Service list */}
         <motion.ul
