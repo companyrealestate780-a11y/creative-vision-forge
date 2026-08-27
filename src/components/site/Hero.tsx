@@ -28,13 +28,12 @@ export function Hero() {
         <img
           src={heroImage}
           alt="Portrait of Mostafa Samir"
-          width={1920}
-          height={1280}
+          width={861}
+          height={768}
           fetchPriority="high"
-          className="size-full object-cover object-center grayscale contrast-110"
+          className="size-full object-contain object-bottom drop-shadow-[0_20px_60px_oklch(0_0_0/0.45)]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/35 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/70" />
       </div>
 
       {/* Thin frame rules */}
